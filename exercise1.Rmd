@@ -47,12 +47,12 @@ head(co2df, 10)
 
 ```{r}
 # Define the transformation function
-drop_uptake_below_20 <- function(data) {
+drop_uptake_below_20 <- function(data_new) {
   # Drop rows where uptake is below 20
-  data <- data[data$uptake >= 20, ]
+  data_new <- data_new[data_new$uptake >= 20, ]
   
   # Return the transformed dataset
-  return(data)
+  return(data_new)
 }
 
 # Transform the CO2 dataset
