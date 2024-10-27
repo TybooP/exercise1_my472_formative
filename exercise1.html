@@ -377,8 +377,9 @@ head(co2df, 10)</code></pre>
 ## 10   Qn2 Quebec nonchilled  250   37.1</code></pre>
 </div>
 </div>
-<div id="creating-a-new-column-uptake_bucket" class="section level2">
-<h2>Creating a New Column ‘uptake_bucket’</h2>
+<div id="first-data-transformation---creating-a-new-column-uptake_bucket" class="section level2">
+<h2>First Data Transformation - Creating a New Column
+‘uptake_bucket’</h2>
 <pre class="r"><code># Define the transformation function
 transform_data &lt;- function(data) {
   # Create a new column &#39;uptake_bucket&#39; to categorize uptake into 10-wide buckets (0-9, 10-19, etc.)
@@ -409,6 +410,34 @@ head(co2df, 10)</code></pre>
 ## 8    Qn2 Quebec nonchilled   95   13.6         10-19
 ## 9    Qn2 Quebec nonchilled  175   27.3         20-29
 ## 10   Qn2 Quebec nonchilled  250   37.1         30-39</code></pre>
+</div>
+<div id="second-data-tranformation-function" class="section level2">
+<h2>Second Data Tranformation Function</h2>
+<pre class="r"><code># Define the transformation function
+drop_uptake_below_20 &lt;- function(data_new) {
+  # Drop rows where uptake is below 20
+  data_new &lt;- data_new[data_new$uptake &gt;= 20, ]
+  
+  # Return the transformed dataset
+  return(data_new)
+}
+
+# Transform the CO2 dataset
+co2df &lt;- drop_uptake_below_20(co2df)
+
+# Display the first 10 rows of the transformed dataset
+head(co2df, 10)</code></pre>
+<pre><code>##    Plant   Type  Treatment conc uptake uptake_bucket
+## 2    Qn1 Quebec nonchilled  175   30.4         30-39
+## 3    Qn1 Quebec nonchilled  250   34.8         30-39
+## 4    Qn1 Quebec nonchilled  350   37.2         30-39
+## 5    Qn1 Quebec nonchilled  500   35.3         30-39
+## 6    Qn1 Quebec nonchilled  675   39.2         30-39
+## 7    Qn1 Quebec nonchilled 1000   39.7         30-39
+## 9    Qn2 Quebec nonchilled  175   27.3         20-29
+## 10   Qn2 Quebec nonchilled  250   37.1         30-39
+## 11   Qn2 Quebec nonchilled  350   41.8         40-49
+## 12   Qn2 Quebec nonchilled  500   40.6         40-49</code></pre>
 </div>
 
 
